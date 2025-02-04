@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BuildToScale.sln"
+    "dotnet.defaultSolution": "Matter-Of-Size.sln"
 }

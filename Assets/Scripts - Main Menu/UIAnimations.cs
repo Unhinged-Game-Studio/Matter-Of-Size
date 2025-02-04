@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ public class UIAnimations : MonoBehaviour
     [SerializeField] CanvasGroup matter;
     [SerializeField] CanvasGroup of;
     [SerializeField] CanvasGroup size;
+    [SerializeField] Boolean mainMenu;
     private bool transitioning = false;
 
     private enum windowType
@@ -31,19 +33,25 @@ public class UIAnimations : MonoBehaviour
 
     void Start()
     {
-        hideEverthing();
-        titleAnimation();
-        buttonsAnimation();
-        showInstructions();
+        if (mainMenu)
+        {
+            hideEverthing();
+            titleAnimation();
+            buttonsAnimation();
+            showInstructions();
+        }
     }
 
     void hideEverthing()
     {
-        for (int i = 0; i < 12; i++)
-            windows[i].SetActive(false);
-        windows[(int)windowType.OPTIONS].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
-        windows[(int)windowType.CREDITS].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
-        windows[(int)windowType.TUTORIAL].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
+        if (mainMenu)
+        {
+            for (int i = 0; i < 12; i++)
+                windows[i].SetActive(false);
+            windows[(int)windowType.OPTIONS].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
+            windows[(int)windowType.CREDITS].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
+            windows[(int)windowType.TUTORIAL].GetComponent<CanvasGroup>().LeanAlpha(0f, 0f);
+        }
     }
 
     void titleAnimation()
@@ -77,11 +85,14 @@ public class UIAnimations : MonoBehaviour
 
     void Update()
     {
-        if (windows[(int)windowType.PLAYBLOCK].transform.localScale.x > 2.0f
-            && (Vector2.Distance(windows[(int)windowType.PLAYBLOCK].GetComponent<RectTransform>().anchoredPosition, windows[(int)windowType.PLAYBUTTON].GetComponent<RectTransform>().anchoredPosition) < 10.0f))
+        if (mainMenu)
         {
-            windows[(int)windowType.PLAYBUTTON].SetActive(true);
-            windows[(int)windowType.PLAYBLOCK].SetActive(false);
+            if (windows[(int)windowType.PLAYBLOCK].transform.localScale.x > 2.0f
+                && (Vector2.Distance(windows[(int)windowType.PLAYBLOCK].GetComponent<RectTransform>().anchoredPosition, windows[(int)windowType.PLAYBUTTON].GetComponent<RectTransform>().anchoredPosition) < 10.0f))
+            {
+                windows[(int)windowType.PLAYBUTTON].SetActive(true);
+                windows[(int)windowType.PLAYBLOCK].SetActive(false);
+            }
         }
     }
 
@@ -101,6 +112,28 @@ public class UIAnimations : MonoBehaviour
     public void playChosen(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void restartChosen(string sceneName)
+    {
+        Time.timeScale = 1f;
+        PauseMenu.isPaused = false;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void exitChosen(string sceneName)
+    {
+        Time.timeScale = 1f;
+        PauseMenu.isPaused = false;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void quitGame()
+    {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     public void optionsChosen()

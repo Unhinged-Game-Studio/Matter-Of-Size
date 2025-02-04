@@ -11,14 +11,17 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Calculate the midpoint and range of the angles
-        float midpoint = (minAngle + maxAngle) / 2.0f;
-        float range = (maxAngle - minAngle) / 2.0f;
+        if (!PauseMenu.isPaused)
+        {
+            // Calculate the midpoint and range of the angles
+            float midpoint = (minAngle + maxAngle) / 2.0f;
+            float range = (maxAngle - minAngle) / 2.0f;
 
-        // Calculate the new rotation angle using a sine wave
-        float currentRotationAngle = midpoint + Mathf.Sin(Time.time * rotationSpeed) * range;
-        
-        // Apply the rotation to the camera's transform
-        transform.rotation = Quaternion.Euler(16, currentRotationAngle, 0);
+            // Calculate the new rotation angle using a sine wave
+            float currentRotationAngle = midpoint + Mathf.Sin(Time.time * rotationSpeed) * range;
+            
+            // Apply the rotation to the camera's transform
+            transform.rotation = Quaternion.Euler(16, currentRotationAngle, 0);
+        }
     }
 }
