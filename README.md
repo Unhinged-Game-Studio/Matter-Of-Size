@@ -5,6 +5,17 @@ Myriad of escape rooms, with the power of shrinking and growing along with items
 ## GameJam
 Entry for Game Maker's Toolkit GameJam 2024
 
+## Escape Rooms
+Due to the nature of puzzle rooms, I will not giveaway the solutions here, but will at least share the general aesthetic of each room
+
+<div style="text-align: center;">
+  <img src="GIFs/Bedroom.png" width = "170" height = "200">
+  <img src="GIFs/Office.png" width = "170" height = "200">
+  <img src="GIFs/Toilet.png" width = "170" height = "200">
+  <img src="GIFs/ShoppingMall.png" width = "170" height = "200">
+  <img src="GIFs/End.png" width = "170" height = "200">
+</div>
+
 ## Features:
 ### Puzzle styled main menu
 
